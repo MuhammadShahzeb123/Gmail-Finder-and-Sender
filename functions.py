@@ -22,7 +22,6 @@ def google_search(keyword:str, site:str, mailtype:str, api_key:str, cse_id:str, 
     """
     dics = []
     for i in range(start, stop, 10): 
-    # ... rest of your code
         query = f'{keyword} site:{site} "{mailtype}"'
         url = 'https://www.googleapis.com/customsearch/v1'
         params = {
@@ -32,7 +31,6 @@ def google_search(keyword:str, site:str, mailtype:str, api_key:str, cse_id:str, 
             'start': i
         }
         response = requests.get(url, params=params)
-        print(response.json())
         dics.append(response.json())
         print(i)
     
