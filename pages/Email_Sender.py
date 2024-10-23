@@ -42,6 +42,7 @@ if st.button("Send Emails"):
         email_sent: bool = send_email(sent_to_email, subject_line, randomized_email)
         if email_sent is True:
             st.success(f"Email sent to {sent_to_email}")
+            print(f"Email sent to {sent_to_email}")
         else:
             st.write(f"Email wasn't sent to {sent_to_email}")
         update_email_list(sent_to_email)
