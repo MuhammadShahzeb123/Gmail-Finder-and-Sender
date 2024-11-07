@@ -1,0 +1,10 @@
+[
+    {   
+        'sender_email': "email@gmail.com", #Doubt
+        'sender_password': "something" 
+    },
+    {   
+        'sender_email': "email1@gmail.com", #Doubt
+        'sender_password': "something" 
+    }
+}
