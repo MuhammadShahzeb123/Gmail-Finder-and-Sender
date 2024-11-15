@@ -20,7 +20,6 @@ with open('emails.json', 'r') as f:
     emails_and_passoword = json.load(f)
 
 
-
 PROXIES = [
     ("198.23.239.134", "6540", "msimyhie", "iuo7t7wzak7j"),
     ("207.244.217.165", "6712", "msimyhie", "iuo7t7wzak7j"),
