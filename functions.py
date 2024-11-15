@@ -6,7 +6,6 @@ from email.mime.multipart import MIMEMultipart
 import random
 from time import sleep
 import ssl
-import pandas as pd
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -118,18 +117,18 @@ def change_email_msg(template: str) -> str:
 def get_random_subject_line() -> str:
     # List of subject lines
     subject_lines = [
-        "you’ll never cold email again…",
-        "🎯 automate every client-getting task!",
-        "you need this client-getting hack!",
-        "you won’t chase clients anymore…",
+        "I want to finish this outreach problem",
+        "can I fix this outreach problem with AI?",
+        "let’s finally solve our outreach problem, yeah?",
+        "can we just fix this outreach hassle already?",
         "🤖 new tool, no more outreach…",
         "what iF OutREach WAsn't Your proBlem anyMOre?",
         "you’ve been doing outreach wrong…",
-        "🤯 this tool does all the outreach…",
-        "🚀 stop client outreach forever!",
-        "🎯 automate lead gen with AI…",
+        "Trying to crack this outreach code—thoughts?",
+        "is this the end of our outreach headache (thanks to AI)?",
+        "outreach struggles? Maybe AI’s got it.",
         "📧 AI sending your next client email?",
-        "you won’t believe this lead machine…"
+        "i don't want to believe this lead machine…"
     ]
     
     # Randomly select a subject line from the list
@@ -266,13 +265,13 @@ def send_email(recipient_email: str, subject: str, message_text: str, which_emai
         sender_email = emails_and_passoword[which_email]['sender_email']
         sender_password = emails_and_passoword[which_email]['sender_password']
     
-    smtp_server = "smtp.gmail.com"
+    smtp_server = "smtp.rambler.ru"
     smtp_port = 465  # Port number for SSL
 
     try:
         # Create the MIME message
         msg = MIMEMultipart()
-        msg['From'] = f"From AI -- <{sender_email}>"
+        msg['From'] = f"Shahzeb AI <{sender_email}>"
         msg['To'] = recipient_email
         msg['Subject'] = subject
         msg.attach(MIMEText(message_text, 'plain'))
