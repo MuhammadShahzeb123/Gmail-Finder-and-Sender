@@ -23,7 +23,7 @@ CEO at ZCopS
 """
 
 
-with open('./pages/emails.txt', 'r', encoding= 'utf-8') as f:
+with open('./pages/emails_new.txt', 'r', encoding= 'utf-8') as f:
     emails = f.readlines()
     
 break_point = 100
@@ -34,7 +34,7 @@ i = 0
 
 while emails:
     
-    with open('./pages/emails.txt', 'r', encoding= 'utf-8') as f: # Read an Email 
+    with open('./pages/emails_new.txt', 'r', encoding= 'utf-8') as f: # Read an Email 
         sent_to_email = f.readline().strip()
         f.close()
 
@@ -46,7 +46,7 @@ while emails:
         print(f"Email sent to {sent_to_email} with {sender_email}")
     else:
         print(f"Email wasn't sent to {sent_to_email} with {sender_email}")
-    update_email_list("./pages/emails.txt")
+    update_email_list("./pages/emails_new.txt")
     sleep(random.randint(5, 10))
     i += 1
     if i == 250:
