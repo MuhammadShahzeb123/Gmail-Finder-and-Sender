@@ -16,8 +16,32 @@ import dns.resolver
 import json
 
 
+EMAIL = """
+{Hi|Hey|Hello} 
+
+{Running a business is tough enough without outreach headaches, right?|Outreach doesn’t have to feel like a never-ending grind.|Imagine spending less time chasing clients and more time serving them.|Struggling with outreach isn’t a bizz requirement—it’s an obstacle we can clear.|Have some time to read me about making outreach work for you, not against you.|What if getting clients felt effortless and natural instead of draining?|Client acquisition shouldn’t eat up all your energy—it can be easier.|Growth happens when outreach becomes efficient, not overwhelming, don't ya think?|It’s time to make client acquisition feel like a breeze, not a chore.}
+
+{With my AI automation, you can skip the manual work and let tech handle the sending for you.|Imagine emails going out seamlessly while you focus on growing your business.|My Email AI can now handle the heavy lifting of outreach, so you don’t have to|Say goodbye to tedious email sending—My Email AI’s got that part covered.|My Email AI ensures your outreach emails are sent effortlessly, right on schedule.|No more juggling—My Email AI handles the outreach flow from leads to inboxes.|My AI-powered tools take the hassle out of sending emails, keeping outreach effortless.}
+
+{Oh, I didn't mention but... It even finds the right people for you—no need to buy another email list, ever.|And yeah, it kinda stalks the Internet (in a good way) to grab the emails of the clients you actually want.|Oh, and guess what? It even hunts down emails of your dream clients online—so no more worrying about cold email lists.|Oh, and it’s got you covered on emails too—it scrapes the web for your perfect leads.}
+
+{Beyond that, it even replies to emails and schedules appointments for you—all on autopilot.|+, it takes care of follow-ups and appointment scheduling, all without lifting a finger.|On top'a that, it responds to replies and manages bookings while you focus elsewhere.|It also handles client replies and secures meetings, leaving you free to focus on growth.}
+
+{Finally, a way to make life easy—autopilot the busy stuff and focus on locking in clients.|So, all you’ve gotta do is show up for those booked calls and close, while AI does the rest.|You can now leave those tough parts for AI and just focus on turning those booked calls into wins.|It’s like having a cheat code—let AI line it all up, and you handle the fun part: closing deals.|You’re all set to make things easy—just sit back, handle the calls, and watch the cash roll in.}
+
+{Funny thing is, this AI actually picked you as a perfect lead for me—so imagine what it can do for your business.|And yeah, the AI scraped your profile as a great match for this—just think how it’ll pinpoint your dream clients too.|To be real with you, if the AI found you as a perfect lead for me, imagine how spot-on it’ll be for your business.|Just so you know, the AI flagged you as a great fit—which means it can do the same for your target clients too.|To keep it straight, the AI singled you out as a perfect lead—now think about how it’ll work for you.|And yes, the AI spotted you as an ideal match for me—that’s exactly how it’ll help you nail your leads too.}
+
+{So yeah, just hit me up if you wanna see how it works—I’m here to help.|Let me know if this sounds cool to you, and I’ll hook you up with the details.|Anyway, lemme know if you wanna try it out—no pressure, just thought it’d help.|Got any questions? Just shoot me a reply—I’m chill and happy to explain more.|Think it’s worth a shot? Just let me know, and I’ll get you set up in no time.}
+
+
+Shahzeb Naveed
+AI Automation Expert | Python Developer
+CEO at ZCopS
+"""
+
+
 with open('emails.json', 'r') as f:
-    emails_and_passoword = json.load(f)
+    emails_and_password = json.load(f)
 
 
 PROXIES = [
@@ -116,22 +140,22 @@ def change_email_msg(template: str) -> str:
 def get_random_subject_line() -> str:
     # List of subject lines
     subject_lines = [
-        "I want to finish this outreach problem",
-        "can I fix this outreach problem with AI?",
-        "let’s finally solve our outreach problem, yeah?",
-        "can we just fix this outreach hassle already?",
-        "🤖 new tool, no more outreach…",
-        "what iF OutREach WAsn't Your proBlem anyMOre?",
+        "AI?",
+        "can we just fix this outreach hassle already??",
+        "what iF OutREach WAsn't Your proBlem anyMOre?!",
+        "can I fix this outreach problem with AI?!",
         "you’ve been doing outreach wrong…",
-        "Trying to crack this outreach code—thoughts?",
+        "tryna crack this outreach code—thoughts...",
         "is this the end of our outreach headache (thanks to AI)?",
         "outreach struggles? Maybe AI’s got it.",
-        "📧 AI sending your next client email?",
         "i don't want to believe this lead machine…"
     ]
     
-    # Randomly select a subject line from the list
-    return random.choice(subject_lines)
+    # Select 4 unique random subject lines
+    final_subject_lines = random.sample(subject_lines, 4)
+    
+    # Return one of the selected subject lines
+    return random.choice(final_subject_lines)
 
 def update_email_list(file_path: str) -> None:
     try:
@@ -257,12 +281,12 @@ def google_search_selenium(keyword: str, site: str = "instagram.com", mailtype: 
 
     return extracted_emails
 
-def send_email(recipient_email: str, subject: str, message_text: str, which_email: int = 0) -> list:
+def send_email(recipient_email: str, subject: str, message_text: str, which_email: int = 1) -> list:
     # Sender email and SMTP server details
         
-    if 0 <= which_email < len(emails_and_passoword):
-        sender_email = emails_and_passoword[which_email]['sender_email']
-        sender_password = emails_and_passoword[which_email]['sender_password']
+    if 0 <= which_email < len(emails_and_password):
+        sender_email = emails_and_password[which_email]['sender_email']
+        sender_password = emails_and_password[which_email]['sender_password']
     
     smtp_server = "smtp.rambler.ru"
     smtp_port = 465  # Port number for SSL
@@ -270,10 +294,10 @@ def send_email(recipient_email: str, subject: str, message_text: str, which_emai
     try:
         # Create the MIME message
         msg = MIMEMultipart()
-        msg['From'] = f"Shahzeb AI <{sender_email}>"
+        msg['From'] = f"Shahzeb <{sender_email}>"
         msg['To'] = recipient_email
         msg['Subject'] = subject
-        msg.attach(MIMEText(message_text, 'plain'))
+        msg.attach(MIMEText(message_text, 'html'))
 
         # Create a secure SSL context
         context = ssl.create_default_context()
@@ -289,7 +313,7 @@ def send_email(recipient_email: str, subject: str, message_text: str, which_emai
         print(f"Failed to send email: {e}")
         return [False, sender_email]  # Return False if there's any issue
     
-def verify_email(email):
+def verify_email(email) -> bool:
     domain = email.split('@')[1]
     try:
         # Get MX records for the domain
@@ -314,3 +338,76 @@ def verify_email(email):
         print(f"Error: {e}")
         return False
 
+def change_email_msg_html(template: str) -> str:
+    # Regular expression to match {...} blocks
+    pattern = r"\{(.*?)\}"
+    
+    # Function to randomly select one of the options within each {...}
+    def select_random(match):
+        options = match.group(1).split('|')  # Split the content by |
+        return random.choice(options)  # Randomly choose one
+    
+    # Substitute all {...} blocks with the randomly selected option
+    result = re.sub(pattern, select_random, template)
+    
+    subject_line = get_random_subject_line()
+    
+    # Create plain text version
+    plain_text_version = result.replace("<br>", "\n").replace("<p>", "").replace("</p>", "")  # Convert HTML to plain text
+    
+    # HTML template with inline CSS
+    html_template = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{subject_line}</title>
+    <style>
+        body {{
+            background-color: #f0f0f0; /* Light gray background */
+            padding: 20px;
+        }}
+        .email-content {{
+            background-color: #ffffff; /* White background for email body */
+            color: #110010; /* Text color */
+            font-size: 150%; /* Increase font size by 150% */
+            font-family: Helvetica, Arial, sans-serif; /* Add more font options as needed */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5); /* Subtle shadow for depth */
+        }}
+        .hidden-preview {{
+            display: none; /* Hide this when the email is opened */
+            color: #100010; /* Ensure it's readable in preview */
+        }}
+    </style>
+</head>
+<body>
+    <div class="hidden-preview">AI that has changed my Life and how I want it to ...</div>
+    <div class="email-content">
+        {result.replace("\n", "<br>")} <!-- Replace newlines with HTML line breaks -->
+    </div>
+</body>
+</html>
+    """
+    
+    # Combine both plain text and HTML into a multipart email format
+    multipart_email = f"""MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="boundary_string"
+
+--boundary_string
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+{plain_text_version}
+
+--boundary_string
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+{html_template}
+
+--boundary_string--
+"""
+
+    return multipart_email
