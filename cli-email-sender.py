@@ -10,7 +10,7 @@ with open("email_template.json", 'r') as f:
 
 break_point = 20
 
-email_selected = int(random.randint(0, 10))
+email_selected = int(random.randint(0, 9))
 
 i = 0
 
@@ -55,7 +55,7 @@ while emails:
     i += 1
     update_email_list("./pages/emails_new.txt")
     email_selected += 1
-    if email_selected >= 11:
+    if email_selected >= 9:
         email_selected = 0
     
     if i == break_point:

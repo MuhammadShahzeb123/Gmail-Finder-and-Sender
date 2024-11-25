@@ -287,8 +287,10 @@ def send_email(recipient_email: str, subject: str, message_text: str, which_emai
     if 0 <= which_email < len(emails_and_password):
         sender_email = emails_and_password[which_email]['sender_email']
         sender_password = emails_and_password[which_email]['sender_password']
-    
-    smtp_server = "smtp.rambler.ru"
+    # sender_email = "me2@shahzeb.online"
+    # sender_password = "ZCopS.com@12345678"
+
+    smtp_server = "smtp.zoho.com"
     smtp_port = 465  # Port number for SSL
 
     try:
